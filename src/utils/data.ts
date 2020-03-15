@@ -1,6 +1,6 @@
 export const data = [
   {
-    title: "Korean Worm",
+    title: "Gray Squirrels",
     date: "1d",
     description:
       "We are conducting a survey of Korean worms in New York City. To sample an area, place a PVC pipe into soil and pour mustard juice in. She kicks away the dead oak leaves and tosses a square frame made of PVC pipe onto the damp earth. Then she unscrews a milk jug. It holds a pale yellow slurry of mustard powder and water that’s completely benign—unless you’re a worm. Seconds after Dobson empties the contents inside the frame, the soil wriggles to life.",

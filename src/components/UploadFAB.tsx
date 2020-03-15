@@ -27,7 +27,7 @@ export default function UploadFAB(props: Props) {
             icon: "pencil",
             label: "Add Note",
             onPress: () => {
-              navigation.navigate("Form");
+              navigation.navigate("Form", {});
             }
           },
           {

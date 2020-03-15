@@ -7,6 +7,7 @@ import { Button, Card, TextInput } from "react-native-paper";
 export default function Form({ route, navigation }) {
   const { upload, photo } = route.params;
   const [selectedImage, setSelectedImage] = useState(photo);
+  const [obs, setObs] = useState(null);
   const date = new Date();
 
   const openImagePickerAsync = async () => {
@@ -32,7 +33,7 @@ export default function Form({ route, navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Card>
+      <Card style={styles.card}>
         <Card.Content>
           <Button
             // labelStyle={{ color: "black" }}
@@ -52,7 +53,7 @@ export default function Form({ route, navigation }) {
           )}
         </Card.Content>
       </Card>
-      <Card>
+      <Card style={styles.card}>
         <Card.Content>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>
             What did you see?
@@ -61,16 +62,21 @@ export default function Form({ route, navigation }) {
             icon="plus"
             mode="outlined"
             color="#3F9142"
-            style={{ borderColor: "#57AE5B", borderWidth: 1 }}
+            style={{ borderColor: "#57AE5B", borderWidth: 1, marginBottom: 5 }}
             onPress={() => {
-              navigation.navigate("Suggestions", { image: selectedImage });
+              navigation.navigate("Suggestions", {
+                image: selectedImage,
+                caption: selectedImage.width === 300,
+                setObs: setObs
+              });
             }}
           >
             Add
           </Button>
+          {obs && <Image source={{ uri: obs }} style={styles.thumbnail} />}
         </Card.Content>
       </Card>
-      <Card>
+      <Card style={styles.card}>
         <Card.Content>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>Notes</Text>
           <TextInput
@@ -85,7 +91,7 @@ export default function Form({ route, navigation }) {
           />
         </Card.Content>
       </Card>
-      <Card>
+      <Card style={styles.card}>
         <Card.Content>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>Time</Text>
           <Text style={{ fontSize: 18 }}>{date.toLocaleString()}</Text>
@@ -95,9 +101,15 @@ export default function Form({ route, navigation }) {
         <Card.Content>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>Location</Text>
           <Text style={{ fontSize: 18 }}>
-            Osprey, Ottawa, ON K2M 2Z6, Canada
+            Kanata, Ottawa, ON K2L 1H9, Canada
           </Text>
           <MapView
+            initialRegion={{
+              latitude: 45.294888,
+              longitude: -75.8648,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421
+            }}
             style={{
               height: 200
             }}
@@ -111,7 +123,7 @@ export default function Form({ route, navigation }) {
         </Button>
       </View> */}
 
-      <Card>
+      <Card style={styles.card}>
         <Card.Content>
           <Button
             mode="contained"
@@ -136,5 +148,9 @@ const styles = StyleSheet.create({
   thumbnail: {
     width: 100,
     height: 100
+  },
+  card: {
+    marginBottom: 1,
+    borderRadius: 0
   }
 });

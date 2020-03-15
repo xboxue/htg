@@ -17,13 +17,17 @@ export default function SuggestionsScreen({ route, navigation }) {
           backgroundColor: "#F7F7F7"
         }}
       >
-        <Image
-          style={{ width: 100, height: 100 }}
-          source={{
-            uri: props.image.uri
-          }}
-        />
-        <Text>{props.caption}</Text>
+        <View style={{ alignItems: "center" }}>
+          <Image
+            style={{ width: 100, height: 100, marginBottom: 10 }}
+            source={{
+              uri: props.image.uri
+            }}
+          />
+          <Text style={{ fontSize: 16 }}>
+            {props.caption ? "Squirrel lying down on branch" : "Not a squirrel"}
+          </Text>
+        </View>
       </View>
       <View style={{ paddingTop: 20 }}>
         <Searchbar
@@ -32,25 +36,36 @@ export default function SuggestionsScreen({ route, navigation }) {
           onChangeText={setValue}
           style={{ marginHorizontal: 10, marginBottom: 10 }}
         />
-        <FlatList
-          keyExtractor={item => item.name}
-          data={data}
-          renderItem={({ item }) => (
-            <Card>
-              <Card.Title
-                left={() => (
-                  <Image
-                    style={{ width: 50, height: 50 }}
-                    source={{
-                      uri: item.image
-                    }}
-                  />
-                )}
-                title={item.name}
-              ></Card.Title>
-            </Card>
-          )}
-        />
+        {props.caption ? (
+          <FlatList
+            keyExtractor={item => item.name}
+            data={data}
+            renderItem={({ item }) => (
+              <Card
+                onPress={() => {
+                  props.setObs(item.image);
+                  navigation.goBack();
+                }}
+              >
+                <Card.Title
+                  left={() => (
+                    <Image
+                      style={{ width: 50, height: 50 }}
+                      source={{
+                        uri: item.image
+                      }}
+                    />
+                  )}
+                  title={item.name}
+                ></Card.Title>
+              </Card>
+            )}
+          />
+        ) : (
+          <View style={{ alignItems: "center", paddingTop: 15 }}>
+            <Text style={{ fontSize: 16 }}>No matches found</Text>
+          </View>
+        )}
       </View>
     </View>
   );
