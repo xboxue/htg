@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { FlatList, Image, StyleSheet, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { Card, Searchbar } from "react-native-paper";
-import { data } from "../data";
+import { data } from "../utils/suggestions";
 
-export default function SuggestionsScreen({ navigation }) {
+export default function SuggestionsScreen({ route, navigation }) {
   const [value, setValue] = useState("");
+  const props = route.params;
 
   return (
     <View style={styles.container}>
@@ -19,10 +20,10 @@ export default function SuggestionsScreen({ navigation }) {
         <Image
           style={{ width: 100, height: 100 }}
           source={{
-            uri:
-              "https://media.npr.org/assets/img/2017/04/25/istock-115796521-fcf434f36d3d0865301cdcb9c996cfd80578ca99-s800-c85.jpg"
+            uri: props.image.uri
           }}
         />
+        <Text>{props.caption}</Text>
       </View>
       <View style={{ paddingTop: 20 }}>
         <Searchbar
@@ -32,7 +33,7 @@ export default function SuggestionsScreen({ navigation }) {
           style={{ marginHorizontal: 10, marginBottom: 10 }}
         />
         <FlatList
-          keyExtractor={item => item.title}
+          keyExtractor={item => item.name}
           data={data}
           renderItem={({ item }) => (
             <Card>
@@ -41,12 +42,11 @@ export default function SuggestionsScreen({ navigation }) {
                   <Image
                     style={{ width: 50, height: 50 }}
                     source={{
-                      uri:
-                        "https://media.npr.org/assets/img/2017/04/25/istock-115796521-fcf434f36d3d0865301cdcb9c996cfd80578ca99-s800-c85.jpg"
+                      uri: item.image
                     }}
                   />
                 )}
-                title="Dog"
+                title={item.name}
               ></Card.Title>
             </Card>
           )}

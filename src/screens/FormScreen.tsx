@@ -32,28 +32,38 @@ export default function Form({ route, navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Button
-        labelStyle={{ color: "black" }}
-        color="black"
-        style={{ borderColor: "#57AE5B", borderWidth: 1 }}
-        icon="camera"
-        mode="outlined"
-        onPress={openImagePickerAsync}
-      >
-        Add Photo
-      </Button>
-      {selectedImage && (
-        <Image source={{ uri: selectedImage.uri }} style={styles.thumbnail} />
-      )}
-
       <Card>
         <Card.Content>
-          <Text>What did you see?</Text>
           <Button
+            // labelStyle={{ color: "black" }}
+            color="#3F9142"
+            style={{ marginBottom: 5 }}
             icon="camera"
             mode="contained"
+            onPress={openImagePickerAsync}
+          >
+            Add Photo
+          </Button>
+          {selectedImage && (
+            <Image
+              source={{ uri: selectedImage.uri }}
+              style={styles.thumbnail}
+            />
+          )}
+        </Card.Content>
+      </Card>
+      <Card>
+        <Card.Content>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+            What did you see?
+          </Text>
+          <Button
+            icon="plus"
+            mode="outlined"
+            color="#3F9142"
+            style={{ borderColor: "#57AE5B", borderWidth: 1 }}
             onPress={() => {
-              navigation.navigate("Suggestions");
+              navigation.navigate("Suggestions", { image: selectedImage });
             }}
           >
             Add
@@ -62,12 +72,31 @@ export default function Form({ route, navigation }) {
       </Card>
       <Card>
         <Card.Content>
-          <Text>{date.toLocaleString()}</Text>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>Notes</Text>
+          <TextInput
+            multiline
+            underlineColor="#57AE5B"
+            numberOfLines={4}
+            style={{
+              // borderWidth: 1,
+              borderColor: "#57AE5B",
+              backgroundColor: "#F7F7F7"
+            }}
+          />
         </Card.Content>
       </Card>
       <Card>
         <Card.Content>
-          <Text>Osprey, Ottawa, ON K2M 2Z6, Canada</Text>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>Time</Text>
+          <Text style={{ fontSize: 18 }}>{date.toLocaleString()}</Text>
+        </Card.Content>
+      </Card>
+      <Card>
+        <Card.Content>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>Location</Text>
+          <Text style={{ fontSize: 18 }}>
+            Osprey, Ottawa, ON K2M 2Z6, Canada
+          </Text>
           <MapView
             style={{
               height: 200
@@ -82,18 +111,19 @@ export default function Form({ route, navigation }) {
         </Button>
       </View> */}
 
-      <TextInput
-        mode="outlined"
-        multiline
-        numberOfLines={4}
-        style={{
-          borderWidth: 1,
-          borderColor: "#e0e0e0",
-          backgroundColor: "#fff"
-        }}
-        label="Notes"
-      />
-      {/* <Button onPress={() => {}} title="Submit"></Button> */}
+      <Card>
+        <Card.Content>
+          <Button
+            mode="contained"
+            color="#3F9142"
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
+            Submit
+          </Button>
+        </Card.Content>
+      </Card>
     </ScrollView>
   );
 }
@@ -101,7 +131,6 @@ export default function Form({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     backgroundColor: "#fff"
   },
   thumbnail: {

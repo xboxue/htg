@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import Card from "../components/Card";
-import { data } from "../data";
+import { data } from "../utils/data";
 
 export default function SavedScreen() {
   return (
