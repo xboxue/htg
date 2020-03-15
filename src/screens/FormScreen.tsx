@@ -1,11 +1,16 @@
 import * as ImagePicker from "expo-image-picker";
-import React from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image, ScrollView, StyleSheet, Text } from "react-native";
 import MapView from "react-native-maps";
+import { Button, Card, TextInput } from "react-native-paper";
 
-export default function Form({ navigation }) {
+export default function Form({ route, navigation }) {
+  const { upload, photo } = route.params;
+  const [selectedImage, setSelectedImage] = useState(photo);
+  const date = new Date();
+
   const openImagePickerAsync = async () => {
-    let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+    const permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
 
     if (permissionResult.granted === false) {
       alert("Permission to access camera roll is required!");
@@ -13,44 +18,83 @@ export default function Form({ navigation }) {
     }
 
     const pickerResult = await ImagePicker.launchImageLibraryAsync();
-    console.log(pickerResult);
+
+    if (pickerResult.cancelled === true) {
+      return;
+    }
+
+    setSelectedImage(pickerResult);
   };
 
+  useEffect(() => {
+    if (upload) openImagePickerAsync();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 24 }}>Add Submission</Text>
+    <ScrollView style={styles.container}>
+      <Button
+        labelStyle={{ color: "black" }}
+        color="black"
+        style={{ borderColor: "#57AE5B", borderWidth: 1 }}
+        icon="camera"
+        mode="outlined"
+        onPress={openImagePickerAsync}
+      >
+        Add Photo
+      </Button>
+      {selectedImage && (
+        <Image source={{ uri: selectedImage.uri }} style={styles.thumbnail} />
+      )}
 
-      {/* <TouchableOpacity onPress={openImagePickerAsync}>
-        <Text style={{ fontSize: 16 }}>Upload Photo</Text>
-      </TouchableOpacity> */}
+      <Card>
+        <Card.Content>
+          <Text>What did you see?</Text>
+          <Button
+            icon="camera"
+            mode="contained"
+            onPress={() => {
+              navigation.navigate("Suggestions");
+            }}
+          >
+            Add
+          </Button>
+        </Card.Content>
+      </Card>
+      <Card>
+        <Card.Content>
+          <Text>{date.toLocaleString()}</Text>
+        </Card.Content>
+      </Card>
+      <Card>
+        <Card.Content>
+          <Text>Osprey, Ottawa, ON K2M 2Z6, Canada</Text>
+          <MapView
+            style={{
+              height: 200
+            }}
+          />
+        </Card.Content>
+      </Card>
 
-      <Text style={{ fontSize: 16 }}>Add Location</Text>
-      <MapView
-        style={{
-          height: 200
-        }}
-      />
+      {/* <ScrollView style={{ marginBottom: 10 }}>
+        <Button onPress={() => navigation.navigate("Camera")}>
+          Take Photo
+        </Button>
+      </View> */}
 
-      <View style={{ marginBottom: 10 }}>
-        <Button
-          title="Take Photo"
-          onPress={() => navigation.navigate("Camera")}
-        />
-      </View>
-      <Button title="Add Photo" onPress={openImagePickerAsync} />
-
-      <Text style={{ fontSize: 16 }}>Notes</Text>
       <TextInput
+        mode="outlined"
         multiline
         numberOfLines={4}
         style={{
           borderWidth: 1,
-          borderColor: "#e0e0e0"
+          borderColor: "#e0e0e0",
+          backgroundColor: "#fff"
         }}
-        placeholder="Description"
-      ></TextInput>
-      <Button onPress={() => {}} title="Submit"></Button>
-    </View>
+        label="Notes"
+      />
+      {/* <Button onPress={() => {}} title="Submit"></Button> */}
+    </ScrollView>
   );
 }
 
@@ -59,5 +103,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#fff"
+  },
+  thumbnail: {
+    width: 100,
+    height: 100
   }
 });

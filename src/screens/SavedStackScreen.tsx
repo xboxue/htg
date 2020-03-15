@@ -9,7 +9,18 @@ const Stack = createStackNavigator();
 
 export default function SavedStackScreen() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerTitleStyle: {
+          fontWeight: "bold"
+        },
+        headerStyle: {
+          height: 100,
+          backgroundColor: "#57AE5B"
+        },
+        headerTintColor: "#fff"
+      }}
+    >
       <Stack.Screen name="Saved" component={SavedScreen} />
       <Stack.Screen name="Project" component={ProjectScreen} />
       <Stack.Screen name="Form" component={FormScreen} />

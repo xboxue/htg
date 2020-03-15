@@ -1,89 +1,75 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 import React from "react";
-import {
-  Button,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View
-} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import MapView from "react-native-maps";
-import Upload from "../components/Upload";
+import UploadFAB from "../components/UploadFAB";
 
 export default function ProjectScreen({ route, navigation }) {
-  const {
-    title,
-    date,
-    description,
-    user,
-    org,
-    saves,
-    instructions
-  } = route.params;
+  const props = route.params;
+  const isFocused = useIsFocused();
 
   return (
-    <>
-      <ScrollView style={styles.container}>
-        <Text style={{ fontSize: 24 }}>{title}</Text>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginBottom: 18
-          }}
-        >
-          <Text style={styles.subtitle}>{date}</Text>
-          <Text style={styles.subtitle}>{org}</Text>
-          <Ionicons
-            name="ios-heart"
-            size={16}
-            color="green"
-            style={{ marginRight: 4 }}
-          />
-          <Text style={styles.subtitle}>{saves}</Text>
-        </View>
-        <Text style={{ fontSize: 18, fontWeight: "bold" }}>Description</Text>
-        <Text style={{ fontSize: 16, marginBottom: 20 }}>{description}</Text>
-
-        <Text style={{ fontSize: 18, fontWeight: "bold" }}>Instructions</Text>
-        <Text style={{ fontSize: 16, marginBottom: 20 }}>{instructions}</Text>
-
-        <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 12 }}>
-          Location
-        </Text>
-        <MapView
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          }}
-          style={{
-            height: 200,
-            marginBottom: 20
-          }}
+    <ScrollView style={styles.container}>
+      <UploadFAB isFocused={isFocused} />
+      <Text style={{ fontSize: 24 }}>{props.title}</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginBottom: 18
+        }}
+      >
+        <Text style={styles.subtitle}>{props.date}</Text>
+        <Text style={styles.subtitle}>{props.org}</Text>
+        <Ionicons
+          name="ios-heart"
+          size={16}
+          color="#57AE5B"
+          style={{ marginRight: 4 }}
         />
+        <Text style={styles.subtitle}>{props.saves}</Text>
+      </View>
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Description</Text>
+      <Text style={{ fontSize: 16, marginBottom: 20 }}>
+        {props.description}
+      </Text>
 
-        <Text style={{ marginBottom: 16, fontSize: 18, fontWeight: "bold" }}>
-          Past Photos
-        </Text>
-        <Image
-          style={{ height: 200 }}
-          source={{
-            uri:
-              "https://media.npr.org/assets/img/2017/04/25/istock-115796521-fcf434f36d3d0865301cdcb9c996cfd80578ca99-s800-c85.jpg"
-          }}
-        />
-        <Text style={{ marginBottom: 30, fontSize: 16 }}>Posted by {user}</Text>
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Instructions</Text>
+      <Text style={{ fontSize: 16, marginBottom: 20 }}>
+        {props.instructions}
+      </Text>
 
-        <Button
-          title="Add Submission"
-          onPress={() => navigation.navigate("Form")}
-        ></Button>
-      </ScrollView>
-      <Upload />
-    </>
+      <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 12 }}>
+        Location
+      </Text>
+      <MapView
+        initialRegion={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421
+        }}
+        style={{
+          height: 200,
+          marginBottom: 20
+        }}
+      />
+
+      <Text style={{ marginBottom: 16, fontSize: 18, fontWeight: "bold" }}>
+        Past Photos
+      </Text>
+      <Image
+        style={{ height: 200 }}
+        source={{
+          uri:
+            "https://media.npr.org/assets/img/2017/04/25/istock-115796521-fcf434f36d3d0865301cdcb9c996cfd80578ca99-s800-c85.jpg"
+        }}
+      />
+      <Text style={{ marginBottom: 30, fontSize: 16 }}>
+        Posted by {props.user}
+      </Text>
+    </ScrollView>
   );
 }
 

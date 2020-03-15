@@ -1,10 +1,19 @@
 import { Camera } from "expo-camera";
-import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Text, View } from "react-native";
+import { IconButton } from "react-native-paper";
 
-export default function CameraScreen() {
+export default function CameraScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const camera = useRef(null);
+
+  const takePicture = async () => {
+    if (camera.current) {
+      const photo = await camera.current.takePictureAsync();
+      navigation.navigate("Review", { photo: photo });
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -18,33 +27,48 @@ export default function CameraScreen() {
 
   return (
     <View style={{ flex: 1 }}>
-      <Camera style={{ flex: 1 }} type={type}>
+      <Camera ref={camera} style={{ flex: 1 }} type={type}>
         <View
           style={{
             flex: 1,
             backgroundColor: "transparent",
-            flexDirection: "row"
+            justifyContent: "flex-end"
           }}
         >
-          <TouchableOpacity
+          <View
             style={{
-              flex: 0.1,
-              alignSelf: "flex-end",
-              alignItems: "center"
-            }}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-evenly"
             }}
           >
-            <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
-              {" "}
-              Flip{" "}
-            </Text>
-          </TouchableOpacity>
+            <IconButton
+              icon="camera-switch"
+              color="#fff"
+              size={40}
+              onPress={() => {
+                setType(
+                  type === Camera.Constants.Type.back
+                    ? Camera.Constants.Type.front
+                    : Camera.Constants.Type.back
+                );
+              }}
+            />
+            <IconButton
+              icon="circle"
+              color="rgba(255,255,255,0.5)"
+              size={64}
+              onPress={() => {
+                takePicture();
+              }}
+            />
+            <IconButton
+              icon="image"
+              color="#fff"
+              size={40}
+              onPress={() => {}}
+            />
+          </View>
         </View>
       </Camera>
     </View>

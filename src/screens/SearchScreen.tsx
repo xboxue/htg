@@ -8,11 +8,7 @@ export default function SearchScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Searchbar
-        placeholder="Search"
-        value={value}
-        onChangeText={setValue}
-      ></Searchbar>
+      <Searchbar placeholder="Search" value={value} onChangeText={setValue} />
     </SafeAreaView>
   );
 }

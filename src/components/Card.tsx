@@ -1,8 +1,7 @@
-import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Chip } from "react-native-paper";
+import { Chip, IconButton } from "react-native-paper";
 
 interface Props {
   title: string;
@@ -27,7 +26,7 @@ export default function Card(props: Props) {
       >
         <Chip
           onPress={() => {}}
-          style={{ backgroundColor: "#f5f5f5" }}
+          style={{ backgroundColor: "#F7F7F7", borderColor: "#E1E1E1" }}
           textStyle={{ fontSize: 12, marginVertical: 0 }}
         >
           {props.tag}
@@ -48,14 +47,13 @@ export default function Card(props: Props) {
       >
         <Text style={styles.subtitle}>{props.date}</Text>
         <Text style={styles.subtitle}>{props.org}</Text>
-        <TouchableOpacity onPress={() => setSaved(!saved)}>
-          <Ionicons
-            name={saved ? "ios-heart" : "ios-heart-empty"}
-            size={16}
-            color={saved ? "green" : "grey"}
-            style={{ marginRight: 4 }}
-          />
-        </TouchableOpacity>
+        <IconButton
+          style={{ margin: 0 }}
+          icon={saved ? "heart" : "heart-outline"}
+          color={saved ? "#57AE5B" : "#9E9E9E"}
+          size={16}
+          onPress={() => setSaved(!saved)}
+        />
         <Text style={styles.subtitle}>{props.saves}</Text>
       </View>
     </View>
