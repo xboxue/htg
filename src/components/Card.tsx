@@ -10,11 +10,12 @@ interface Props {
   org: string;
   tag: string;
   saves: number;
+  saved: boolean;
 }
 
 export default function Card(props: Props) {
   const navigation = useNavigation();
-  const [saved, setSaved] = useState(false);
+  const [saved, setSaved] = useState(props.saved);
 
   return (
     <View style={styles.container}>

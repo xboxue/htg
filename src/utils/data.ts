@@ -1,9 +1,22 @@
 export const data = [
   {
-    title: "Gray Squirrels",
+    title: "Project Squirrel",
     date: "1d",
     description:
-      "We are conducting a survey of Korean worms in New York City. To sample an area, place a PVC pipe into soil and pour mustard juice in. She kicks away the dead oak leaves and tosses a square frame made of PVC pipe onto the damp earth. Then she unscrews a milk jug. It holds a pale yellow slurry of mustard powder and water that’s completely benign—unless you’re a worm. Seconds after Dobson empties the contents inside the frame, the soil wriggles to life.",
+      "Project Squirrel is calling all citizen scientists of all ages to count the number of squirrels in their neighborhoods and report their findings. The goal is to understand tree squirrel ecology. Some neighborhoods may have grey (and “black” squirrels, which are almost always grey squirrels!), fox, and red squirrels while a nearby town only has one species. In many places, it seems one species or another is becoming more common. Learn how to identify these three tree squirrels then report your observations about their presence or absence and some of the ecological conditions of your neighborhood. Anyone can participate in Project Squirrel. No matter where you live, city or suburb, from the Midwest to the East Coast, Canada to Mexico, The U.K. to Italy, if tree squirrels live in your neighborhood, you are encouraged to become a squirrel monitor. The scientists at Project Squirrel will also use this project to understand the effect that participation in citizen science has on participants and data quaility. By contributing to Project Squirrel and documenting your experience, you can provide valuable information that will eventually be used to learn how valuable citizen scientists are to the advancement of scientific knowledge as a whole. ",
+    instructions:
+      "Take a look around your home, office, school, or anywhere you are and, whether you see squirrels or not, submit your observations. We want to know where squirrels are as well as where they aren’t.",
+    user: "Boban",
+    tag: "Environment",
+    saves: 49,
+    saved: true,
+    org: "Chicago Academy of Sciences"
+  },
+  {
+    title: "Invasive Korean Worms",
+    date: "1d",
+    description:
+      "We are conducting a survey of Korean worms in New York City. To sample an area, place a PVC pipe into soil and pour mustard juice in.",
     instructions: "1. Go outside. 2. Find worm. 3. Take photo",
     user: "Boban",
     tag: "Environment",
@@ -12,7 +25,7 @@ export const data = [
     org: "University of Toronto"
   },
   {
-    title: "Ash Trees Photos in Ottawa",
+    title: "Ash Trees in Ottawa",
     date: "1d",
     description:
       "We are conducting a survey of emerald ash borers in Ottawa. We are looking for photos of ash trees around Ottawa.",
@@ -21,10 +34,10 @@ export const data = [
     tag: "Environment",
     saves: 27,
     saved: false,
-    org: "WWF"
+    org: "City of Ottawa"
   },
   {
-    title: "Survey of Yonge Street Potholes in Toronto",
+    title: "Potholes in Toronto",
     date: "1d",
     description:
       "We are conducting a survey of emerald ash borers in Ottawa. We are looking for photos of ash trees around Ottawa.",
@@ -32,7 +45,7 @@ export const data = [
     user: "Mana",
     tag: "City",
     saves: 53,
-    saved: false,
+    saved: true,
     org: "City of Toronto"
   },
   {
@@ -46,18 +59,6 @@ export const data = [
     saves: 5,
     saved: false,
     org: "WWF"
-  },
-  {
-    title: "Japanese Mink",
-    date: "1d",
-    description:
-      "We are conducting a survey of Korean worms in New York City. To sample an area, place a PVC pipe into soil and pour mustard juice in.",
-    instructions: "1. Go outside. 2. Find worm. 3. Take photo",
-    user: "Boban",
-    tag: "Environment",
-    saves: 49,
-    saved: false,
-    org: "University of Toronto"
   },
   {
     title: "Dandelions and Tumbleweeds",

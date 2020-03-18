@@ -8,7 +8,7 @@ export default function SavedScreen() {
     <View style={styles.container}>
       <FlatList
         keyExtractor={item => item.title}
-        data={data.slice(1)}
+        data={[data[0]].concat([data[3]])}
         renderItem={({ item }) => <Card {...item}></Card>}
       />
     </View>

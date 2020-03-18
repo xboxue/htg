@@ -45,10 +45,10 @@ export default function ProjectScreen({ route, navigation }) {
       </Text>
       <MapView
         initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
+          latitude: 45.294888,
+          longitude: -75.8648,
+          latitudeDelta: 10,
+          longitudeDelta: 10
         }}
         style={{
           height: 200,
@@ -66,7 +66,7 @@ export default function ProjectScreen({ route, navigation }) {
             "https://media.npr.org/assets/img/2017/04/25/istock-115796521-fcf434f36d3d0865301cdcb9c996cfd80578ca99-s800-c85.jpg"
         }}
       />
-      <Text style={{ marginBottom: 30, fontSize: 16 }}>
+      <Text style={{ marginBottom: 30, fontSize: 14 }}>
         Posted by {props.user}
       </Text>
     </ScrollView>

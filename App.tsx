@@ -22,7 +22,9 @@ export default function App() {
                     ? "ios-home"
                     : route.name === "Search"
                     ? "ios-search"
-                    : "ios-heart"
+                    : route.name === "Saved"
+                    ? "ios-heart"
+                    : "md-person"
                 }
                 size={size}
                 color={color}
@@ -37,6 +39,7 @@ export default function App() {
           <Tab.Screen name="Home" component={HomeStackScreen} />
           <Tab.Screen name="Search" component={SearchScreen} />
           <Tab.Screen name="Saved" component={SavedStackScreen} />
+          <Tab.Screen name="Profile" component={SavedStackScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </PaperProvider>
